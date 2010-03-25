@@ -1,0 +1,70 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_autoload_info().
+ */
+function solr_resource_autoload_info() {
+  return array(
+    'SolrResource' => array(
+      'file' => 'SolrResource.php',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_service_resource().
+ */
+function solr_resource_services_resources() {
+  $res = array(
+    // Solr resource
+    'solr' => array(
+      'index' => array(
+        'access arguments' => array('use solr resource search'),
+        'callback' => 'SolrResource::index',
+        'args' => array(
+          array(
+            'name' => 'query',
+            'type' => 'string',
+            'optional' => TRUE,
+            'default value' => '*.*',
+            'description' => 'The solr query.',
+            'source' => array('param' => 'query'),
+          ),
+          array(
+            'name' => 'page',
+            'type' => 'int',
+            'description' => 'The page offset.',
+            'optional' => TRUE,
+            'default value' => 0,
+            'source' => array('param' => 'page'),
+          ),
+          array(
+            'name' => 'fields',
+            'type' => 'string',
+            'description' => 'The comma-separated list of fields to return.',
+            'default value' => '',
+            'optional' => TRUE,
+            'source' => array('param' => 'fields'),
+          ),
+          array(
+            'name' => 'fields',
+            'type' => 'array',
+            'description' => 'Extra parameters for the search.',
+            'default value' => array(),
+            'optional' => TRUE,
+            'source' => array('param'),
+          ),
+        ),
+      ),
+    ),
+  );
+  return $res;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function solr_resource_perm() {
+  return array('use solr resource search');
+}

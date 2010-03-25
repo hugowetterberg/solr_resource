@@ -1,0 +1,7 @@
+; $Id$
+name = Solr Resource
+description = Provides a services resource for solr searches
+package = Services - services
+dependencies[] = services
+dependencies[] = apachesolr
+core = 6.x
