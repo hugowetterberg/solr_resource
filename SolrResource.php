@@ -42,7 +42,7 @@ class SolrResource {
       $facets = split(',', $params['facets']);
       $sparams['facet'] = 'true';
       $sparams['facet.sort'] = 'true';
-      $sparams['facet.limit'] = 20;
+      $sparams['facet.limit'] = !empty($params['facet_limit']) ? intval($params['facet_limit']) : 20;
       $sparams['facet.mincount'] = 1;
       $sparams['facet.field'] = $facets;
 
